@@ -40,9 +40,10 @@ def manual(image_path, label_path,
     image_files = os.listdir(image_path)
     label_files = os.listdir(label_path)
 
-    # 随机打乱文件列表
-    random.shuffle(image_files)
-    random.shuffle(label_files)
+    # 随机打乱文件列表，但保持对应关系
+    combined_files = list(zip(image_files, label_files))
+    random.shuffle(combined_files)
+    image_files, label_files = zip(*combined_files)
 
     # 划分数据集
     total_samples = len(image_files)
@@ -96,9 +97,10 @@ def auto(train, val, test, image_path, label_path, file_path):
     image_files = os.listdir(image_path)
     label_files = os.listdir(label_path)
 
-    # 随机打乱文件列表
-    random.shuffle(image_files)
-    random.shuffle(label_files)
+    # 随机打乱文件列表，但保持对应关系
+    combined_files = list(zip(image_files, label_files))
+    random.shuffle(combined_files)
+    image_files, label_files = zip(*combined_files)
 
     # 划分数据集
     total_samples = len(image_files)
